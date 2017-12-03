@@ -166,4 +166,8 @@ cookies={'pgv_pvi':'4254048256',
 
 url = 'https://ssl.ptlogin2.qq.com/ptqrlogin?u1=http%3A%2F%2Fw.qq.com%2Fproxy.html&ptqrtoken=574853233&ptredirect=0&h=1&t=1&g=1&from_ui=1&ptlang=2052&action=0-0-1511828901879&js_ver=10232&js_type=1&login_sig=&pt_uistyle=40&aid=501004106&daid=164&mibao_css=m_webqq&'
 r = session.get(url=url,headers=headers,cookies=cookies)
-print(r)
+a = r.text
+b = re.findall(r"'(.*?)'", a)
+for bb in b:
+    print(bb)
+tmp = random.random()
