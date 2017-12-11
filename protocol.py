@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+""" This module stores information about smartqq protocol """
+
+__author__ = 'JiedaokouWangguan'
+
 import random
 import time
 from smarterqq import utils
@@ -106,7 +113,7 @@ headers_get_selfinfo = {'Referer':'http://s.web2.qq.com/proxy.html?v=20130916001
 # ---------------get self info-------------------
 
 # ----------------get online-----------------------
-url_get_online = 'http://d1.web2.qq.com/channel/get_online_buddies2?vfwebqq={}&clientid=53999199&psessionid={}&t='
+url_get_online = 'http://d1.web2.qq.com/channel/get_online_buddies2?vfwebqq={}&clientid=53999199&psessionid={}&t={}'
 headers_get_online = {'Referer':'http://d1.web2.qq.com/proxy.html?v=20151105001&callback=1&id=2',
                       'Host': 'd1.web2.qq.com',
                       'Accept-Encoding': 'gzip, deflate',
@@ -135,5 +142,26 @@ headers_poll = {'Referer':'http://d1.web2.qq.com/proxy.html?v=20151105001&callba
 r_poll = '{{"ptwebqq":"{}","clientid":53999199,"psessionid":"{}","key":""}}'
 # ------------------poll---------------------------
 
+# -------------------get friend info---------------
+url_get_friendinfo = "http://s.web2.qq.com/api/get_friend_info2?tuin={}&vfwebqq={}&clientid=53999199&psessionid={}&t={}"
+headers_get_friendinfo = {'Referer': 'http://s.web2.qq.com/proxy.html?v=20130916001&callback=1&id=1',
+           'Origin': None,
+           'Host': 's.web2.qq.com',
+           'Content-Type': 'utf-8'}
+# -------------------get friend info---------------
+
+# --------------------send msg---------------------
+url_send_msg = 'http://d1.web2.qq.com/channel/send_buddy_msg2'
+headers_send_msg = {'Referer':'http://d1.web2.qq.com/cfproxy.html?v=20151105001&callback=1',
+                    'Origin':'http://d1.web2.qq.com',
+                    'Host': 'd1.web2.qq.com',
+                    'Accept-Encoding': 'gzip, deflate',
+                    'Content-Type': 'application/x-www-form-urlencoded'}
+r_send_msg = '{{"to":{},"content":"[\\"{}\\",[\\"font\\",{{\\"name\\":\\"宋体\\",\\"size\\":10,' \
+             '\\"style\\":[0,0,0],\\"color\\":\\"000000\\"}}]]","clientid":53999199,"msg_id":{},"psessionid":"{}"}}'
+code_send_msg_suc = 0
+str_send_msg_suc = "发送成功！"
+str_send_msg_failed = "发送失败！"
+# --------------------send msg---------------------
 
 

@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+""" This module stores utils functions """
+
+__author__ = 'JiedaokouWangguan'
+
 
 def hash2(uin, ptvfwebqq):
     ptb = [0,0,0,0]
