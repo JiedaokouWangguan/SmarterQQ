@@ -1,7 +1,7 @@
 # SmarterQQ QQBot based on SmartQQ
 
 之前感觉挺好玩一直想做，前几天稍微空闲时间多就研究了一下。
-对于qq机器人的协议的分析网上挺多的，但大部分是几年前的，有些依然管用，但有些已经被tx爸爸改了，对于没有修改的很多是借鉴[scienjus做的分析](http://www.scienjus.com/webqq-analysis-1/),[ScienJus/qqbot](https://github.com/ScienJus/qqbot)
+对于qq机器人的协议的分析网上挺多的，但大部分是几年前的，有些依然管用，但有些已经被tx爸爸改了，对于没有修改的很多是借鉴[scienjus的微博](http://www.scienjus.com/webqq-analysis-1/), [ScienJus/qqbot](https://github.com/ScienJus/qqbot)
 
 然后小部分代码，比如二维码的处理，借鉴了[liuwons/wxBot](https://github.com/liuwons/wxBot)
 
@@ -25,4 +25,21 @@
 >Referer:`https://xui.ptlogin2.qq.com/cgibin/xlogindaid=164&target=self&style=40&pt_disable_pwd=1&mibao_css=m_webqq&appid=501004106&enable_qlogin=0&no_verifyimg=1&s_url=http%3A%2F%2Fw.qq.com%2Fproxy.html&f_url=loginerroralert&strong_login=1&login_state=10&t=20131024001`
 
 如果header设置不全非常容易返回错误信息。 
+
+然后这个请求的返回值对一个key是qrsig的cookie进行赋值，我们将这个值从cookie里取出来用来轮询二维码的扫描情况。
+
+### 轮询二维码扫描情况
+这个轮询就是一遍遍地问服务器有没有设备去扫描刚才得到的二维码，这个请求的url是
+> url:url = `ttps://ssl.ptlogin2.qq.com/ptqrlogin?ptqrtoken={ptqrtoken}&webqq_type=10&remember_uin=1&login2qq=1&aid=501004106&u1=http%3A%2F%2Fw.qq.com%2Fproxy.html%3Flogin2qq%3D1%26webqq_type%3D10&ptredirect=0&ptlang=2052&daid=164&from_ui=1&pttype=1&dumy=&fp=loginerroralert&action=0-0-{time_tag}&mibao_css=m_webqq&t=undefined&g=1&js_type=0&js_ver=10232&login_sig=&pt_randsalt=0`
+
+在这个url中我们需要两个变量，ptqrtoken和time_tag。ptqrtoken是用hash算出来的，hash的参数是刚才得到的qrsig，hash函数是通过一个request url是`https://imgcache.qq.com/ptlogin/ver/10232/js/c_login_2.js?max_age=604800&ptui_identifier=000D6ECCB81920246F7442F57BB50C2AB1B1F66F70CEC9568BAAFE32`的请求得到的\(在js里\)。用python写就是这样:
+
+    def hash33(s):
+     e = 0
+     i = 0
+     n = len(s)
+     while n > i:
+         e += (e << 5) + ord(s[i])
+         i += 1
+     return 2147483647 & e
 
