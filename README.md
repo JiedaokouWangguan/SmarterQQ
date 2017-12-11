@@ -19,7 +19,9 @@
     pgv_pvi="%d" % int(round(2147483647 * random.random()) * + time.time() % 1E10)
   
 拿到之后放到cookie里，接着设置一些header信息：
-Request URL:`https://ssl.ptlogin2.qq.com/ptqrshow?appid=501004106&e=2&l=M&s=3&d=72&v=4&t=0.3188660334306206&daid=164&pt_3rd_aid=0`
-Referer:`https://xui.ptlogin2.qq.com/cgibin/xlogindaid=164&target=self&style=40&pt_disable_pwd=1&mibao_css=m_webqq&appid=501004106&enable_qlogin=0&no_verifyimg=1&s_url=http%3A%2F%2Fw.qq.com%2Fproxy.html&f_url=loginerroralert&strong_login=1&login_state=10&t=20131024001`
+
+>Request URL:`https://ssl.ptlogin2.qq.com/ptqrshow?appid=501004106&e=2&l=M&s=3&d=72&v=4&t=0.3188660334306206&daid=164&pt_3rd_aid=0`
+>Referer:`https://xui.ptlogin2.qq.com/cgibin/xlogindaid=164&target=self&style=40&pt_disable_pwd=1&mibao_css=m_webqq&appid=501004106&enable_qlogin=0&no_verifyimg=1&s_url=http%3A%2F%2Fw.qq.com%2Fproxy.html&f_url=loginerroralert&strong_login=1&login_state=10&t=20131024001`
+
 如果header设置不全非常容易返回错误信息。 
 
