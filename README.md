@@ -46,11 +46,26 @@
         
 对于time_tag，我看到的包基本都是从2290左右开始，然后每次增加大概2000。如果某次返回的json里面的状态码是0则证明验证成功，然后我们把cookie中的一个新值ptwebqq取出来。
 
-###获取vfwebqq
+### 获取vfwebqq
 
 对于vfwebqq的请求较为简单
 >url : `http://s.web2.qq.com/api/getvfwebqq?ptwebqq={ptwebqq}&clientid=53999199&psessionid=&t={time}`
 
 其中ptwebqq刚才拿到了，time就填int(time.time()\*1000) \(webqq协议里面的时间大多都是这个\)。然后我们把cookie里的vfwebqq取出来。
 
+### 获取psessionid，uin
 
+这个请求比之前的tricky一点点
+
+>url : `http://d1.web2.qq.com/channel/login2`
+>headers :`{'Referer':'http://d1.web2.qq.com/proxy.html?v=20151105001&callback=1&id=2',
+           'Origin':'http://d1.web2.qq.com',
+           'Host': 'd1.web2.qq.com',
+           'Accept-Encoding': 'gzip, deflate',
+           'Content-Type': 'application/x-www-form-urlencoded'}`
+>payload : {'r':'{"ptwebqq":"{ptwebqq}","clientid":53999199,"psessionid":"","status":"online"}'}
+
+之前的请求都是get，这是第一个post请求。需要注意的是payload，r的value是一个字符串，ptwebqq的value需要用双引号括起来，clientid的value不能用引号扩。
+然后我们就能从返回的json里拿到psessionid，uin了。
+
+>未完待续
