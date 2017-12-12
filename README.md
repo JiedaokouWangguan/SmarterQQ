@@ -1,7 +1,7 @@
 # SmarterQQ QQBot based on SmartQQ
 
 之前感觉挺好玩一直想做，前几天稍微空闲时间多就研究了一下。
-对于qq机器人的协议的分析网上挺多的，但大部分是几年前的，有些依然管用，但有些已经被tx爸爸改了，对于没有修改的很多是借鉴[scienjus的微博](http://www.scienjus.com/webqq-analysis-1/), [ScienJus/qqbot](https://github.com/ScienJus/qqbot)
+对于qq机器人的协议的分析网上挺多的，但大部分是几年前的，有些依然管用，但有些已经被tx爸爸改了，对于没有修改的协议内容，很多是借鉴[scienjus的微博](http://www.scienjus.com/webqq-analysis-1/), 他的项目[ScienJus/qqbot](https://github.com/ScienJus/qqbot)
 
 然后小部分代码，比如二维码的处理，借鉴了[liuwons/wxBot](https://github.com/liuwons/wxBot)
 
