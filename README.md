@@ -28,18 +28,29 @@
 
 然后这个请求的返回值对一个key是qrsig的cookie进行赋值，我们将这个值从cookie里取出来用来轮询二维码的扫描情况。
 
-### 轮询二维码扫描情况
+### 轮询二维码扫描情况，获取ptwebqq
+
 这个轮询就是一遍遍地问服务器有没有设备去扫描刚才得到的二维码，这个请求的url是
 > url:url = `ttps://ssl.ptlogin2.qq.com/ptqrlogin?ptqrtoken={ptqrtoken}&webqq_type=10&remember_uin=1&login2qq=1&aid=501004106&u1=http%3A%2F%2Fw.qq.com%2Fproxy.html%3Flogin2qq%3D1%26webqq_type%3D10&ptredirect=0&ptlang=2052&daid=164&from_ui=1&pttype=1&dumy=&fp=loginerroralert&action=0-0-{time_tag}&mibao_css=m_webqq&t=undefined&g=1&js_type=0&js_ver=10232&login_sig=&pt_randsalt=0`
 
 在这个url中我们需要两个变量，ptqrtoken和time_tag。ptqrtoken是用hash算出来的，hash的参数是刚才得到的qrsig，hash函数是通过一个request url是`https://imgcache.qq.com/ptlogin/ver/10232/js/c_login_2.js?max_age=604800&ptui_identifier=000D6ECCB81920246F7442F57BB50C2AB1B1F66F70CEC9568BAAFE32`的请求得到的\(在js里\)。用python写就是这样:
 
     def hash33(s):
-     e = 0
-     i = 0
-     n = len(s)
-     while n > i:
-         e += (e << 5) + ord(s[i])
-         i += 1
-     return 2147483647 & e
+        e = 0
+        i = 0
+        n = len(s)
+        while n > i:
+            e += (e << 5) + ord(s[i])
+            i += 1
+        return 2147483647 & e
+        
+对于time_tag，我看到的包基本都是从2290左右开始，然后每次增加大概2000。如果某次返回的json里面的状态码是0则证明验证成功，然后我们把cookie中的一个新值ptwebqq取出来。
+
+###获取vfwebqq
+
+对于vfwebqq的请求较为简单
+>url : `http://s.web2.qq.com/api/getvfwebqq?ptwebqq={ptwebqq}&clientid=53999199&psessionid=&t={time}`
+
+其中ptwebqq刚才拿到了，time就填int(time.time()\*1000) \(webqq协议里面的时间大多都是这个\)。然后我们把cookie里的vfwebqq取出来。
+
 
