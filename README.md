@@ -15,7 +15,7 @@
 很久以前tx关闭了webQQ的账号密码登陆api，现在只能通过扫二维码登陆，在查资料的时候还发现了一个兄弟用qq空间的账号密码登陆的api先拿到一些cookie，再通过这个cookie登陆webQQ，没有具体研究，不过思路感觉很灵性。
 
 ### 拿二维码
-在chrome的开发者工具里找到了得到二维码的请求，但意外的发现这个请求居然已经有cookie了{cookie:pgv_pvi=4270682112; pgv_si=s9482312704},而之前所有的包里都没有找到set-cookie，于是就去翻js，果然在一个request url是`https://tajs.qq.com/stats?sId=61651582`的请求的返回结果 \(是个js\)找到了对于pvg_pvi和pvg_si的赋值,是一个对于当前时间的随机函数：
+在chrome的开发者工具里找到了得到二维码的请求，但意外的发现这个请求居然已经有cookie了，cookie包括两个key:pgv_pvi和pgv_si,而之前所有的包里都没有找到set-cookie，于是就去翻js，果然在一个request url是`https://tajs.qq.com/stats?sId=61651582`的请求的返回结果 \(是个js\)找到了对于pvg_pvi和pvg_si的赋值,是一个对于当前时间的随机函数：
 
     pgv_si = "s%d" % int(round(2147483647 * random.random()) * + time.time() % 1E10)
     pgv_pvi="%d" % int(round(2147483647 * random.random()) * + time.time() % 1E10)
