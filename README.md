@@ -65,7 +65,7 @@
            'Content-Type': 'application/x-www-form-urlencoded'}`
 >payload : {'r':'{"ptwebqq":"{ptwebqq}","clientid":53999199,"psessionid":"","status":"online"}'}
 
-之前的请求都是get，这是第一个post请求。需要注意的是payload，r的value是一个字符串，ptwebqq的value需要用双引号括起来，clientid的value不能用引号扩。
+之前的请求都是get，这是第一个post请求。需要注意的是payload，r的value是一个字符串，ptwebqq的value需要用引号括起来，clientid的value不能用引号扩。
 然后我们就能从返回的json里拿到psessionid，uin了。
 
 
