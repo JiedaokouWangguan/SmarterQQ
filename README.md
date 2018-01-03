@@ -71,8 +71,48 @@
 然后我们就能从返回的json里拿到psessionid，uin了。
 
 
+## 2.收发消息
+
+### 2.1.get_user_friends
+
+获得所有好友,`url:http://s.web2.qq.com/api/get_user_friends2, Host:s.web2.qq.com,Origin:http://s.web2.qq.com,Referer:http://s.web2.qq.com/proxy.html?v=20130916001&callback=1&id=1`
+payload格式是:r:{"vfwebqq":"{vfwebqq}","hash":"{hash}"}。vfwebqq是之前得到的，hash函数的参数是ptwebqq
+
+    def hash2(uin, ptvfwebqq):
+        ptb = [0,0,0,0]
+        for i in range(0, len(ptvfwebqq)):
+            ptbIndex = i%4
+            ptb[ptbIndex] ^= ord(ptvfwebqq[i])
+
+        salt = ["EC", "OK"]
+        uinByte = [0,0,0,0]
+        uinByte[0] = (((uin >> 24) & 0xFF) ^ ord(salt[0][0]))
+        uinByte[1] = (((uin >> 16) & 0xFF) ^ ord(salt[0][1]))
+        uinByte[2] = (((uin >> 8) & 0xFF) ^ ord(salt[1][0]))
+        uinByte[3] = ((uin & 0xFF) ^ ord(salt[1][1]))
+        result = [0,0,0,0,0,0,0,0]
+        for i in range(0,8):
+            if i % 2 == 0:
+                result[i] = ptb[i>>1]
+            else:
+                result[i] = uinByte[i>>1]
+        return byte2hex(result)
+
+
+    def byte2hex(bytes):
+        hex = hex = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
+        buf = ""
+        for i in range(0, len(bytes)):
+            buf += hex[(bytes[i] >> 4) & 0xF]
+            buf += hex[bytes[i] & 0xF]
+        return buf
+
+这个post请求的返回是个json
+{retcode:0,
+result:{categories:[], friends:[],info:[],marknames:[],vipinfo:[]}}
+
 
 # 未完待续
 街道口网管
 
-12/11
+12/13
