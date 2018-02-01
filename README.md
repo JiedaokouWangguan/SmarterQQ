@@ -112,7 +112,4 @@ payload格式是:r:{"vfwebqq":"{vfwebqq}","hash":"{hash}"}。vfwebqq是之前得
 result:{categories:[], friends:[],info:[],marknames:[],vipinfo:[]}}
 
 
-# 未完待续
-街道口网管
 
-12/13
