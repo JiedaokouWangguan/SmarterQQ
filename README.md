@@ -1,3 +1,6 @@
+
+# http://w.qq.com/ 已经全新改版，现有协议都不能用了(2/1/2018)
+
 # SmarterQQ QQBot based on SmartQQ
 
 之前感觉挺好玩一直想做，前几天稍微空闲时间多就研究了一下。
@@ -112,5 +115,4 @@ payload格式是:r:{"vfwebqq":"{vfwebqq}","hash":"{hash}"}。vfwebqq是之前得
 result:{categories:[], friends:[],info:[],marknames:[],vipinfo:[]}}
 
 
-# http://w.qq.com/ 已经全新改版，现有协议都不能用了(2/1/2018)
 
