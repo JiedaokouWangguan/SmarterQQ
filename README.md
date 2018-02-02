@@ -111,6 +111,6 @@ payload格式是:r:{"vfwebqq":"{vfwebqq}","hash":"{hash}"}。vfwebqq是之前得
 {retcode:0,
 result:{categories:[], friends:[],info:[],marknames:[],vipinfo:[]}}
 
-2/1/2018
-# http://w.qq.com/ 已经全新改版，现有协议都不能用了
+
+# http://w.qq.com/ 已经全新改版，现有协议都不能用了(2/1/2018)
 
